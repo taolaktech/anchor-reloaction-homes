@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Wifi, Car, Utensils, Shield, MapPin, Building2, Stethoscope, Calendar, CreditCard, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Wifi, Car, Utensils, Shield, MapPin, Building2, Stethoscope, Calendar, CreditCard, CheckCircle } from "lucide-react";
 import { useState } from "react";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
@@ -12,6 +12,18 @@ const PropertyDetail = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+
+  const nextImage = () => {
+    if (property) {
+      setSelectedImage((prev) => (prev + 1) % property.images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (property) {
+      setSelectedImage((prev) => (prev - 1 + property.images.length) % property.images.length);
+    }
+  };
 
   const properties = {
     "executive-suite": {
@@ -106,15 +118,48 @@ const PropertyDetail = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div className="lg:col-span-2">
-              <div 
-                className="aspect-[16/10] rounded-lg overflow-hidden cursor-pointer"
-                onClick={() => setIsImageEnlarged(true)}
-              >
-                <img 
-                  src={property.images[selectedImage]} 
-                  alt={property.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+              <div className="relative group">
+                <div 
+                  className="aspect-[16/10] rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => setIsImageEnlarged(true)}
+                >
+                  <img 
+                    src={property.images[selectedImage]} 
+                    alt={property.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                
+                {/* Navigation Arrows */}
+                {property.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        prevImage();
+                      }}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      disabled={selectedImage === 0}
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        nextImage();
+                      }}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      disabled={selectedImage === property.images.length - 1}
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </button>
+                  </>
+                )}
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                  {selectedImage + 1} / {property.images.length}
+                </div>
               </div>
             </div>
             <div className="flex lg:flex-col gap-2">
@@ -245,18 +290,50 @@ const PropertyDetail = () => {
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={() => setIsImageEnlarged(false)}
         >
-          <div className="relative max-w-6xl max-h-full">
+          <div className="relative max-w-6xl max-h-full group">
             <img 
               src={property.images[selectedImage]} 
               alt={property.name}
               className="max-w-full max-h-full object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
             />
+            
+            {/* Modal Navigation Arrows */}
+            {property.images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevImage();
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-opacity duration-300"
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextImage();
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-opacity duration-300"
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </button>
+              </>
+            )}
+
+            {/* Close Button */}
             <button 
-              className="absolute top-4 right-4 text-white hover:text-white/80"
+              className="absolute top-4 right-4 text-white hover:text-white/80 bg-black/50 hover:bg-black/70 rounded-full p-2"
               onClick={() => setIsImageEnlarged(false)}
             >
               ✕
             </button>
+            
+            {/* Image Counter for Modal */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full">
+              {selectedImage + 1} / {property.images.length}
+            </div>
           </div>
         </div>
       )}
