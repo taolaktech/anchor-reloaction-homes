@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, CreditCard, FileText, CheckCircle } from "lucide-react";
+import ContactModal from "./ContactModal";
 
 const LeaseTerms = () => {
+  const [showContactModal, setShowContactModal] = useState(false);
   const features = [
     {
       icon: Calendar,
@@ -62,12 +65,22 @@ const LeaseTerms = () => {
             <Button variant="hero" size="lg">
               Check Availability
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-white text-white hover:bg-white hover:text-primary"
+              onClick={() => setShowContactModal(true)}
+            >
               Request Quote
             </Button>
           </div>
         </div>
       </div>
+      
+      <ContactModal 
+        isOpen={showContactModal} 
+        onClose={() => setShowContactModal(false)} 
+      />
     </section>
   );
 };

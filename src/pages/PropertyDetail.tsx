@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Wifi, Car, Utensils, Shield, MapPin, Building2, Stethoscope, Calendar, CreditCard, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import ContactModal from "@/components/ContactModal";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
@@ -12,6 +13,7 @@ const PropertyDetail = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState(0);
   const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const nextImage = () => {
     if (property) {
@@ -265,7 +267,12 @@ const PropertyDetail = () => {
                   <Button className="w-full" size="lg">
                     Check Availability
                   </Button>
-                  <Button variant="outline" className="w-full" size="lg">
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    size="lg"
+                    onClick={() => setShowContactModal(true)}
+                  >
                     Request Quote
                   </Button>
                   <Button variant="ghost" className="w-full">
@@ -337,6 +344,11 @@ const PropertyDetail = () => {
           </div>
         </div>
       )}
+      
+      <ContactModal 
+        isOpen={showContactModal} 
+        onClose={() => setShowContactModal(false)} 
+      />
     </div>
   );
 };
