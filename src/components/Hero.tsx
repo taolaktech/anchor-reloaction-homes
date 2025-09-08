@@ -36,12 +36,12 @@ const Hero = () => {
             <div className="flex items-center gap-4">
               <a href="tel:+1234567890" className="flex items-center gap-2 text-white/90 hover:text-white transition-colors">
                 <Phone className="h-5 w-5" />
-                <span>(555) 123-4567</span>
+                <span>(512) 676-9497</span>
               </a>
-              <a href="mailto:info@anchorrelocation.com" className="flex items-center gap-2 text-white/90 hover:text-white transition-colors">
+              {/* <a href="mailto:info@anchorelocation.com" className="flex items-center gap-2 text-white/90 hover:text-white transition-colors">
                 <Mail className="h-5 w-5" />
                 <span>Book Now</span>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

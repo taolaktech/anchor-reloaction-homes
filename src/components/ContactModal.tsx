@@ -13,7 +13,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         <DialogHeader>
           <DialogTitle className="text-center">Contact Anchor Relocation Homes</DialogTitle>
           <DialogDescription className="text-center">
-            Get in touch with us for your quote and booking needs
+            Get in touch with us for pricing and booking needs
           </DialogDescription>
         </DialogHeader>
         
@@ -28,7 +28,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 href="tel:+1-555-ANCHOR" 
                 className="text-primary hover:underline"
               >
-                +1 (555) ANCHOR-1
+                +1 (512) 676-9497
               </a>
             </div>
           </div>
@@ -40,16 +40,16 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             <div>
               <p className="font-semibold">Email</p>
               <a 
-                href="mailto:info@anchorrelocation.com" 
+                href="mailto:info@anchorelocation.com" 
                 className="text-primary hover:underline"
               >
-                info@anchorrelocation.com
+                info@anchorelocation.com
               </a>
             </div>
           </div>
           
           <div className="text-center text-sm text-muted-foreground">
-            <p>We typically respond within 2-4 hours during business hours</p>
+            <p>We typically respond within 1 hour!</p>
             <p className="mt-1">Monday - Friday: 8AM - 6PM EST</p>
           </div>
         </div>

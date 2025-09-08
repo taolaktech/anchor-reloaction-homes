@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { MapPin, Building2, Stethoscope, Briefcase } from "lucide-react";
+import { MapPin, Building2, Stethoscope, UtensilsCrossed } from "lucide-react";
 
 const LocationBenefits = () => {
   const locations = [
@@ -16,10 +16,10 @@ const LocationBenefits = () => {
       details: "Central locations with easy access to corporate offices and meeting venues"
     },
     {
-      icon: Briefcase,
-      title: "Tech Corridor Proximity",
-      description: "Close to innovation hubs",
-      details: "Strategically located near major tech companies and startup ecosystems"
+      icon: UtensilsCrossed,
+      title: "Dining & Shopping Access",
+      description: "Close to major restaurants and stores",
+      details: "Conveniently located near top dining spots, retail centers, and everyday essentials"
     },
     {
       icon: MapPin,

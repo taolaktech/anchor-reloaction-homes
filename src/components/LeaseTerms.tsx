@@ -62,16 +62,17 @@ const LeaseTerms = () => {
             Contact us today for availability and pricing
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg">
+            {/* <Button variant="hero" size="lg">
               Check Availability
-            </Button>
+            </Button> */}
             <Button 
               variant="outline" 
+              style={{ color: "black" }}
               size="lg" 
               className="border-white text-white hover:bg-white hover:text-primary"
               onClick={() => setShowContactModal(true)}
             >
-              Request Quote
+              Request Pricing
             </Button>
           </div>
         </div>

@@ -17,11 +17,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-accent" />
-                <span>(555) 123-4567</span>
+                <span>(512) 676-9497</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-accent" />
-                <span>info@anchorrelocation.com</span>
+                <span>info@anchorelocation.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-accent" />
@@ -35,7 +35,7 @@ const Footer = () => {
             <ul className="space-y-2 text-background/80">
               <li>Corporate Housing</li>
               <li>Extended Stay Solutions</li>
-              <li>Relocation Services</li>
+              {/* <li>Relocation Services</li> */}
               <li>Direct Corporate Billing</li>
               <li>Flexible Lease Terms</li>
             </ul>
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-background/20 mt-8 pt-8 text-center text-background/60">
-          <p>&copy; 2024 Anchor Relocation Homes. All rights reserved.</p>
+          <p>&copy; 2024 Taolak LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>
