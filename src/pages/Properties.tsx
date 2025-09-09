@@ -1,11 +1,30 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import property1 from "@/assets/property-1.jpg";
 import property3 from "@/assets/property-3.jpg";
+import { useForm } from "@formspree/react";
+import { useRef } from "react";
 
 const Properties = () => {
+  const [state, handleSubmit] = useForm("xvgbkped"); // from Formspree dashboard
+    const formRef = useRef<HTMLFormElement | null>(null);
+    const navigate = useNavigate();
+    
+    const onSubmit = async (e, id: string) => {    
+      e.preventDefault();
+      try {
+        await handleSubmit(e);
+        if (state.succeeded) {
+            formRef.current.reset();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      
+      navigate(`/property/${id}`);
+    };
   const properties = [
     {
       id: "executive-suite",
@@ -75,12 +94,18 @@ const Properties = () => {
                   <p className="text-accent font-medium mb-2">{property.type}</p>
                   <p className="text-muted-foreground mb-4">{property.description}</p>
                   <p className="text-sm text-muted-foreground mb-4">📍 {property.location}</p>
-                  <Link to={`/property/${property.id}`}>
-                    <Button className="w-full group">
-                      View Details
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <form ref={formRef} onSubmit={(e) => onSubmit(e, property.id)} method="POST">
+                    <input type="hidden" name="name" value={`Viewed Details for ${property.name}`} onChange={(e) => console.log("view details clicked")} />
+                      <Button disabled={state.submitting} type="submit" className="w-full group">
+                        View Details
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                  </form>
+                  {/* <Link to={}>
+                    <Button >
+                      
                     </Button>
-                  </Link>
+                  </Link> */}
                 </div>
               </Card>
             ))}

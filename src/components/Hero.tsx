@@ -1,9 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import property1 from "@/assets/property-1.jpg";
+import { useRef } from "react";
+import { useForm } from "@formspree/react";
 
 const Hero = () => {
+  const [state, handleSubmit] = useForm("xvgbkped"); // from Formspree dashboard
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const navigate = useNavigate();
+  
+  const onSubmit = async (e) => {    
+    try {
+      await handleSubmit(e);
+      if (state.succeeded) {
+          formRef.current.reset();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    navigate("/properties");
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -27,12 +45,14 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/properties">
-              <Button variant="hero" size="lg" className="group">
-                View Properties
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+            <form ref={formRef} onSubmit={onSubmit} method="POST">
+              <input type="hidden" name="name" value="View Properties" onChange={(e) => console.log("view property clicked")} />
+                <Button disabled={state.submitting} type="submit" variant="hero" size="lg" className="group">
+                  View Properties
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+            </form>
+            
             <div className="flex items-center gap-4">
               <a href="tel:+1234567890" className="flex items-center gap-2 text-white/90 hover:text-white transition-colors">
                 <Phone className="h-5 w-5" />
